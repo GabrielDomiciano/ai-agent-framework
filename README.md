@@ -16,14 +16,6 @@ It's model-agnostic: orchestrate from Claude, plan on GLM, review on Qwen, or an
 6. From there, speak naturally. The Maestro orchestrates everything. On first run, it automatically dispatches the Contextualizer to map the codebase.
 7. Customize — add personas, rules, skills, and providers to fit your project (see Customization below).
 
-## Structure
-
-```
-personas/    Specialized AI roles (who does the work)
-rules/       Constraints organized by authority level
-skills/      Reusable procedures and protocols
-```
-
 ## How It Works
 
 The **Maestro** is the conductor. It receives user requests, decomposes them, and dispatches work to specialized personas:
@@ -34,6 +26,20 @@ The **Maestro** is the conductor. It receives user requests, decomposes them, an
 - **Contextualizer** — documents project structure for orientation
 
 Each persona has an identity (who they are), a playbook (what they do), a handoff format (what they deliver), and red lines (what they must not do). Each persona also declares a `preferredModel` — the Maestro uses this to route work to the right provider automatically.
+
+## Why This Over Other Harnesses?
+
+Frameworks like GSD, HumanLayer, and OpenDev are software — they require a programming language, dependencies, and runtime integration. This kit is **pure natural language**. Every persona, rule, and skill is a Markdown file. There is no code to install, no SDK to learn, no build step to maintain.
+
+That makes it extensible by anyone who can write a sentence. Add a persona by writing a `.md` file. Change a rule by editing a line. Swap a provider by updating a table row. The entire framework is readable, forkable, and understandable without knowing any programming language.
+
+## Structure
+
+```
+personas/    Specialized AI roles (who does the work)
+rules/       Constraints organized by authority level
+skills/      Reusable procedures and protocols
+```
 
 ## Rules Hierarchy
 
@@ -58,3 +64,7 @@ Skills codify procedures that personas reference. They answer "how to do X" so p
 - Modify existing files to match your project's needs
 
 Each directory has a README with the full schema definition.
+
+## Best Practices
+
+- **Keep premium models as the orchestrator.** The Maestro (Claude, Codex) makes routing decisions and manages context — these are short, high-leverage interactions worth the cost. Token-heavy roles like Architect and Reviewer can be delegated to capable but cheaper models (Qwen, Kimi) to reduce consumption without sacrificing quality.
