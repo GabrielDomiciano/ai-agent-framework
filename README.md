@@ -1,10 +1,10 @@
 # Agent Starter Kit
 
-> You speak naturally, a Maestro agent breaks it into tasks and routes each one to a specialized AI model.
+> Speak naturally. A Maestro agent breaks your request into tasks and routes each one to a specialized AI model.
 
-The scaffold for your ultra-personalized, **multi-model** AI harness in **pure natural language**. The smartest model orchestrates the workflow while cheaper/faster ones handle the less complicated bits, **extending your premium coding plan (such as Claude Code)** while fresh eyes enhance the output.
+A fully customizable, **multi-model** AI harness in **pure natural language**. The smartest model orchestrates the workflow while cheaper/faster ones handle the less complicated bits, **extending your premium coding plan (such as Claude Code)**.
 
-It's model-agnostic: orchestrate from Claude, plan on GLM, review on Qwen, or any combination — any CLI scoring 1300+ ELO on [GDPval-AA](https://artificialanalysis.ai/evaluations/gdpval-aa) can run the show.
+It's model-agnostic: orchestrate from Claude, plan on GLM, review on Qwen, or any combination you want.
 
 ## Setup
 
@@ -23,7 +23,7 @@ It's model-agnostic: orchestrate from Claude, plan on GLM, review on Qwen, or an
 
 3. Start the AI agent (e.g., `claude`, or whatever CLI you use).
 4. Say **"Please comply with AGENTS.md."** — this boots the Maestro and loads the framework.
-5. From there, speak naturally. The Maestro orchestrates everything. On first run, it automatically dispatches the Contextualizer to map the codebase.
+5. The Maestro orchestrates everything. On first run, it automatically dispatches the Contextualizer to map the codebase.
 6. Customize — add personas, rules, skills, and providers to fit your project (see Customization below).
 
 ## How It Works
@@ -36,12 +36,6 @@ The **Maestro** is the conductor. It receives user requests, decomposes them, an
 - **Contextualizer** — documents project structure for orientation
 
 Each persona has an identity (who they are), a playbook (what they do), a handoff format (what they deliver), and red lines (what they must not do). Each persona also declares a `preferredModel` — the Maestro uses this to route work to the right provider automatically.
-
-## Why This Over Other Harnesses?
-
-Frameworks like GSD, HumanLayer, and OpenDev are software — they require a programming language, dependencies, and runtime integration. This kit is **pure natural language**. Every persona, rule, and skill is a Markdown file. There is no code to install, no SDK to learn, no build step to maintain.
-
-That makes it extensible by anyone who can write a sentence. Add a persona by writing a `.md` file. Change a rule by editing a line. Swap a provider by updating a table row. The entire framework is readable, forkable, and understandable without knowing any programming language.
 
 ## Structure
 
@@ -77,6 +71,42 @@ Skills codify procedures that personas reference. They answer "how to do X" so p
 
 Each directory has a README with the full schema definition.
 
-## Best Practices
+## FAQ
 
-- **Keep premium models as the orchestrator.** The Maestro (Claude, Codex) makes routing decisions and manages context — these are short, high-leverage interactions worth the cost. Token-heavy roles like Architect and Reviewer can be delegated to capable but cheaper models (Qwen, Kimi) to reduce consumption without sacrificing quality.
+### Why this over other harnesses?
+
+Frameworks like GSD, HumanLayer, and OpenDev are software — they require a programming language, dependencies, and runtime integration. This kit is **pure natural language**. Every persona, rule, and skill is a Markdown file. There is no code to install, no SDK to learn, no build step to maintain.
+
+Other harnesses are bulldozers — heavy with built-in packages, skills, and guidance that consume tokens every session, even when most of it is irrelevant to your project. This kit is a **scalpel**: minimal by design, meant to be extended with your own tailored personas, rules, and skills. You pay only for the context you actually need. Add a persona by writing a `.md` file. Change a rule by editing a line. Swap a provider by updating a table row.
+
+### Why multi-model?
+
+Premium models are routinely quantized weeks after launch — the version you fell in love with gradually loses sharpness as the provider optimizes for throughput. A multi-model harness fights this in two ways:
+
+1. **Token conservation.** The orchestrator (Maestro) only handles short, high-leverage decisions — routing, decomposition, review gating. Token-heavy roles like Architect and Coder are delegated to other capable models, so your premium plan lasts longer and you stay under rate limits.
+2. **Fresh eyes.** Different models catch different things. A reviewer running on a separate provider will flag issues that the coder's model normalized. Multi-model is not just cheaper — it produces better output.
+3. **Resilience.** Coding plans tend to have their rate limits reduced or models quantized over time. Spreading work across providers means you're less affected when any single plan degrades. If one provider tightens limits or loses quality, shift that persona's `preferredModel` to another row in the Providers table.
+
+### What do I need to run this?
+
+A coding plan or API key for each provider you route to. We recommend coding plans — **Claude Code** (Anthropic), **Codex** (OpenAI), and **Alibaba Model Studio** (Qwen) offer flat-rate pricing with generous token allowances designed for agentic workflows. API keys work too, but plans are more cost-effective for sustained use. Each provider needs its CLI tool installed (e.g., `claude` for Claude Code, `opencode` for Qwen). If you only route to one provider, one plan is enough.
+
+### How does the Maestro use multiple models from a single CLI?
+
+The dispatch skill (`skills/dispatch.md`) handles this automatically. When a persona's `preferredModel` matches the host runtime (e.g., you're running Claude Code and the persona wants `claude`), the Maestro dispatches natively using the host's built-in subagent mechanism (e.g., the Task tool). When the `preferredModel` points to a different provider (e.g., `qwen`), the Maestro shells out to that provider's CLI tool (e.g., `opencode`) by piping the assembled prompt via `stdin`. The Providers table in `skills/dispatch.md` maps each model to its CLI — add rows for any provider you want to use.
+
+### Can I use this with just one model?
+
+Yes. Set every persona's `preferredModel` to your host runtime (e.g., `claude`) and the framework runs entirely within a single provider. You still benefit from the structured decomposition, review pipeline, and long-term memory — just without the multi-model routing.
+
+### How should I assign models to personas?
+
+Keep premium models as the orchestrator. The Maestro makes routing decisions and manages context — these are short, high-leverage interactions worth the cost. Token-heavy roles like Architect and Reviewer can be delegated to capable but cheaper models to reduce consumption without sacrificing quality.
+
+### Does the framework auto-update?
+
+Yes. On every session start, the boot sequence runs `git -C .agents pull`. If the pull brings changes, the Maestro reads the changelog, purges any long-term memory entries that the update made obsolete, and reboots with the new instructions.
+
+### What does "model-agnostic" mean? Which models are supported?
+
+Any model with a CLI tool that can accept a prompt via `stdin` works. As a quality floor, we recommend models scoring 1300+ ELO on [GDPval-AA](https://artificialanalysis.ai/evaluations/gdpval-aa) — a benchmark for general-purpose reasoning. Below that threshold, personas may struggle with multi-step tasks.

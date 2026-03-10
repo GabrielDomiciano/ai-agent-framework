@@ -4,7 +4,15 @@
 0.2.3 - 2026/03/10
 feat(boot): add gitignore check — ensure .agents/ and .memory/ are in project .gitignore on startup
 feat(boot): add auto-update — pull latest framework on session start, reboot if changes detected
+feat(boot): add long-term memory loading and inline memory purge after framework update
+feat(boot): replace vague Orient/First-run steps with deterministic context check via find
+feat: add agent-memory skill — long-term memory across sessions
+feat: add context-maintenance skill — .context.md schema and update rules
+refactor(contextualizer): reference context-maintenance skill for .context.md schema
 docs(readme): replace vague setup steps with deterministic shell commands (git clone, ln -s)
+docs(readme): consolidate FAQ — merge Why This, Why Multi-Model, and Best Practices into FAQ section
+docs(readme): add FAQ entries for auto-update, model assignment, and model-agnostic explanation with ELO reference
+docs(readme): clean intro — fix tagline comma splice, drop fillers, replace "ultra-personalized" with "fully customizable"
 
 0.2.2 - 2026/03/09
 feat(maestro): surface pre-existing issues (bugs, tech debt, code smells) found by sub-agents during Deliver
