@@ -1,13 +1,17 @@
 ---
 shortDescription: Session startup — gitignore, auto-update, memory, rules, context, and greet.
 usedBy: [maestro]
-version: 0.3.0
-lastUpdated: 2026-03-10
+version: 0.3.3
+lastUpdated: 2026-03-26
 ---
 
 ## Purpose
 
 Every session starts cold. The Maestro needs to ensure the project is wired correctly, the framework is up to date, load the project's rules, and understand the codebase before it can dispatch work effectively. This skill defines the boot sequence that brings the Maestro from zero to ready.
+
+## Path Convention
+
+All framework files live under `.agents/`. Markdown references within the framework use bare paths for readability — always resolve them under `.agents/`.
 
 ## Procedure
 
@@ -33,7 +37,7 @@ Every session starts cold. The Maestro needs to ensure the project is wired corr
 
 3. **Memory.** Load long-term memory (uses: `skills/agent-memory.md`).
 
-4. **Load the rules.** Read and internalize all files under `rules/commandments/` and `rules/edicts/`. Counsel (`rules/counsel/`) is optional — read it if the task involves user-facing communication.
+4. **Load the rules index.** Read `rules/README.md` to know what rules are available and their scopes. Do not read the individual rule files — sub-agents will read them when dispatched.
 
 5. **Context.** Verify the project has context files. Run:
 

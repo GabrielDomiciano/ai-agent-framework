@@ -6,6 +6,11 @@ The scaffold for a fully customizable, **multi-model** AI harness in **pure natu
 
 It's model-agnostic: orchestrate from Claude, plan on GLM, review on Qwen, or any combination you want.
 
+![Boot sequence demo](docs/demo.png)
+*Maestro booted on a Clean Architecture Go project — gitignore, auto-update, memory, rules, and 35 context files created automatically.*
+
+This is a **foundation**, not a finished product. It ships only what an average developer needs out of the box — general-purpose personas, common workflow skills, and unopinionated rules. Anything domain-specific or highly opinionated belongs in your own fork. Clone it, extend it, make it yours — or better yet, make one for your entire company to use.
+
 ## Setup
 
 1. Clone into `.agents/` inside your project:
@@ -57,8 +62,12 @@ Skills codify procedures that personas reference. They answer "how to do X" so p
 
 - **agent-memory** — long-term memory across sessions
 - **boot** — session startup sequence
+- **code-coherence-review** — logic coherence, correctness, and structural integrity checks
+- **code-quality-review** — rules-walk procedure for coding standards compliance
+- **code-sec-review** — OWASP-aligned security code review checklist
 - **context-maintenance** — schema and rules for `.context.md` files
-- **dispatch** — how the Maestro assembles and sends work to personas.
+- **dispatch** — how the Maestro assembles and sends work to personas
+- **loop-recovery** — structured recovery and escalation for retry loops
 - **task-tracking** — file-based to-do for multi-step work
 
 ## Customization

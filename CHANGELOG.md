@@ -1,6 +1,22 @@
 # Changelog
 
 ```log
+0.3.1 - 2026/03/26
+fix(agents,boot): symlink-aware paths — AGENTS.md references use .agents/ prefix, boot skill hints bare paths resolve under .agents/
+
+0.3.0 - 2026/03/26
+refactor: merge README boot content into AGENTS.md — single-hop boot
+feat(skills): add loop-recovery — structured retry pivot/abandon with oscillation and drift detection
+feat(skills): add code-sec-review — OWASP-aligned security code review checklist
+feat(skills): add code-coherence-review — logic, correctness, and structural integrity checks
+feat(skills): add code-quality-review — rules-walk procedure for coding standards compliance
+feat(rules): add code-debugging edict — root cause before fix, three-strike rule, anti-rationalization
+feat(rules): add clarification counsel — stop/proceed/escalate taxonomy, clarify-plan-act gates
+feat(personas): rewrite reviewer — lean identity with three structured passes (coherence, quality, security), prompt injection red line
+feat(rules): expand code-quality edict — data trust boundary, process-killing exceptions, richer testing, schema change disclosure
+refactor(boot): load rules index only — Maestro reads rules/README.md, sub-agents read individual rules when dispatched
+refactor(dispatch): expand rule loading from commandments-only to all tiers, add loop-recovery to dispatch notes
+
 0.2.3 - 2026/03/10
 feat(boot): add gitignore check — ensure .agents/ and .memory/ are in project .gitignore on startup
 feat(boot): add auto-update — pull latest framework on session start, reboot if changes detected
