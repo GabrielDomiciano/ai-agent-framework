@@ -1,7 +1,7 @@
 ---
 shortDescription: Assembles sub-agent prompts with task brief and routes to the correct provider.
 usedBy: [maestro]
-version: 0.2.2
+version: 0.2.3
 lastUpdated: 2026-03-27
 ---
 
