@@ -102,8 +102,8 @@ EOF
 Provider-specific flags (add entries as you integrate providers):
 
 - **`claude`**: `--model [model]` (accepts `haiku`, `sonnet`, `opus`). Do **not** use `--print` (`-p`) — it bypasses permission checks.
-- **`codex`**: `exec - --model [model] --sandbox workspace-write --skip-git-repo-check -C [workspace]`. `exec -` reads the prompt from `stdin`. Use this only when Codex must be called externally by another host runtime; if the current host is already Codex and it supports subagents, stay native. Add `--full-auto` only when the environment already enforces the required safety boundaries.
-- **`cursor-agent`**: `--print --trust --model [model] --workspace [workspace] "[assembled prompt]"`. Cursor CLI takes the prompt as an argument in headless mode; keep it non-interactive.
+- **`codex`**: `exec - --model [model] --sandbox workspace-write --skip-git-repo-check -C [workspace]`. Use `exec -` to read from `stdin` and keep dispatch non-interactive/reproducible. Add `--full-auto` only when safety boundaries are already enforced by the environment.
+- **`cursor-agent`**: `--model [model] "[assembled prompt]"` in headless/non-interactive mode. Add `--workspace [workspace]` only when explicitly provided. Add `--trust` only under externally enforced safety controls.
 - **`opencode`**: `OPENCODE_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS=600000 opencode run --model [provider/model]`. The env var raises the bash timeout from 120s to 600s. Optional: `--thinking` (shows thinking blocks).
 
 ## Guardrails
