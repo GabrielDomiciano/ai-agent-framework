@@ -1,6 +1,9 @@
 # Changelog
 
 ```log
+0.3.2 - 2026/03/27
+feat(memory): add cycle counter — reset at boot, increment after each cycle, warn user at ≥7 cycles
+
 0.3.1 - 2026/03/26
 fix(agents,boot): symlink-aware paths — AGENTS.md references use .agents/ prefix, boot skill hints bare paths resolve under .agents/
 

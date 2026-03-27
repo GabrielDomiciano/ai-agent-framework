@@ -1,8 +1,8 @@
 ---
 shortDescription: Long-term memory across sessions.
 usedBy: [maestro]
-version: 0.1.0
-lastUpdated: 2026-03-10
+version: 0.1.1
+lastUpdated: 2026-03-27
 ---
 
 ## Purpose
@@ -13,14 +13,28 @@ Agents start cold every session — lessons learned and user preferences vanish 
 
 1. **Check for the memory directory.** Look for `.memory/` at the project root. If it does not exist, create it with `long-term.md` initialized with the section headers from the schema below.
 
-2. **Read long-term memory at session start.** Read `.memory/long-term.md`. This step is read-only — do not modify long-term memory here.
+2. **Reset cycle count.** Run:
 
-3. **Write to long-term memory on feedback.** When the user provides feedback or corrections on a sub-agent's output, extract the lesson and append it to the appropriate section of `long-term.md`.
+   ```bash
+   echo 0 > .memory/cycle-count
+   ```
+
+   The cycle counter tracks how many cycles the Maestro has completed since the last boot and must start fresh each time.
+
+3. **Read long-term memory at session start.** Read `.memory/long-term.md`. This step is read-only — do not modify long-term memory here.
+
+4. **Write to long-term memory on feedback.** When the user provides feedback or corrections on a sub-agent's output, extract the lesson and append it to the appropriate section of `long-term.md`.
 
    - One line per entry.
    - Before appending, scan the section for duplicates or contradictions. If a new entry contradicts an existing one, replace the old entry.
 
-4. **Distill before closing.** When the session ends, review the conversation and extract any reusable lessons — patterns that worked, mistakes to avoid, user preferences revealed. Append them to the appropriate sections of `long-term.md` (same deduplication rules as step 3).
+5. **Increment cycle count.** After every completed cycle, run:
+
+   ```bash
+   count=$(<.memory/cycle-count) && echo $((count + 1)) > .memory/cycle-count
+   ```
+
+6. **Distill before closing.** When the session ends, review the conversation and extract any reusable lessons — patterns that worked, mistakes to avoid, user preferences revealed. Append them to the appropriate sections of `long-term.md` (same deduplication rules as step 4).
 
 ## Schema
 
