@@ -42,6 +42,8 @@ The **Maestro** is the conductor. It receives user requests, decomposes them, an
 
 Each persona has an identity (who they are), a playbook (what they do), a handoff format (what they deliver), and red lines (what they must not do). Each persona also declares a `preferredModel` — the Maestro uses this to route work to the right provider automatically.
 
+The framework **learns as it works**. Corrections, preferences, and lessons are captured to long-term memory and carried into every future session. Interrupted work is tracked in session files so the next boot can resume where the last one stopped.
+
 ## Structure
 
 ```
@@ -60,7 +62,7 @@ skills/      Reusable procedures and protocols
 
 Skills codify procedures that personas reference. They answer "how to do X" so personas can focus on "what to do."
 
-- **agent-memory** — long-term memory across sessions
+- **agent-memory** — long-term and session memory across sessions
 - **boot** — session startup sequence
 - **code-coherence-review** — logic coherence, correctness, and structural integrity checks
 - **code-quality-review** — rules-walk procedure for coding standards compliance
