@@ -32,9 +32,9 @@ This is the only registry. If a persona is not listed there, it does not exist. 
 3. **Select the provider and model.** Resolve `preferredModel` and `modelTier` against the Providers table. If `preferredModel` is omitted, use the host runtime's provider. The persona's `modelTier` is a floor — upgrade one tier when the task demands multi-step reasoning across system boundaries (e.g., cross-layer architectural changes, security/auth logic, or production deployment pipelines).
 
 4. **Decide how to dispatch.** Look up the persona's `preferredModel` in the Providers table to find its CLI column. Then:
-   - **Native dispatch** — if the current host runtime can satisfy the target provider through its native subagent mechanism, use that path instead of shelling out. Examples: Claude Code Task tool, Codex subagent environment, Cursor's native agent/subagent flow.
-   - **CLI dispatch** — if the current host runtime cannot satisfy the target provider natively, shell out to the provider's external CLI tool (see CLI Dispatch section).
-   - If the preferred provider's external CLI is not installed or reachable, but the host can still satisfy the request natively, fall back to native dispatch and record the deviation in session memory.
+   - **Native dispatch** — the provider's CLI matches the host runtime. Use the host's built-in subagent mechanism (e.g., Task tool for Claude Code, Codex subagent environment, Cursor's native agent/subagent flow). Do not shell out to the same tool's CLI.
+   - **CLI dispatch** — the provider's CLI does not match the host runtime. Shell out to the provider's CLI tool (see CLI Dispatch section).
+   - If the preferred provider's CLI is not installed or unreachable, fall back to native dispatch and record the deviation in session memory.
 
 5. **Strip the frontmatter.** Wrap the result in `<agent>` tags verbatim — do not summarize, paraphrase, or shorten the persona file. The full text must arrive exactly as written. Each dispatch targets exactly one agent — never multiple personas in a single prompt.
 
