@@ -91,7 +91,7 @@ Each row maps a provider to its `preferredModel` value, CLI tool, and concrete m
 
 ## CLI Dispatch
 
-When the host runtime differs from the target provider, dispatch using the provider's accepted input mode. Prefer `stdin` when the CLI supports it; otherwise pass the assembled prompt as a single non-interactive argument.
+When the host runtime differs from the target provider, pipe the assembled prompt through `stdin`:
 
 ```bash
 cat << 'EOF' | [cli-tool] [flags]
@@ -102,8 +102,8 @@ EOF
 Provider-specific flags (add entries as you integrate providers):
 
 - **`claude`**: `--model [model]` (accepts `haiku`, `sonnet`, `opus`). Do **not** use `--print` (`-p`) — it bypasses permission checks.
-- **`codex`**: `exec - --model [model] --sandbox workspace-write --skip-git-repo-check -C [workspace]`. Use `exec -` to read from `stdin` and keep dispatch non-interactive/reproducible. Add `--full-auto` only when safety boundaries are already enforced by the environment.
-- **`cursor-agent`**: `--model [model] "[assembled prompt]"` in headless/non-interactive mode. Add `--workspace [workspace]` only when explicitly provided. Add `--trust` only under externally enforced safety controls.
+- **`codex`**: `exec - --model [model] --sandbox workspace-write --skip-git-repo-check -C [workspace]`. Add `--full-auto` only when safety boundaries are already enforced by the environment.
+- **`cursor-agent`**: `--model [model]`. Add `--workspace [workspace]` only when explicitly provided. Add `--trust` only under externally enforced safety controls.
 - **`opencode`**: `OPENCODE_EXPERIMENTAL_BASH_DEFAULT_TIMEOUT_MS=600000 opencode run --model [provider/model]`. The env var raises the bash timeout from 120s to 600s. Optional: `--thinking` (shows thinking blocks).
 
 ## Guardrails
