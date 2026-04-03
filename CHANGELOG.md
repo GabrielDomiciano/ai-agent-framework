@@ -1,6 +1,9 @@
 # Changelog
 
 ```log
+0.4.3 - 2026/04/03
+feat(maestro): add plan review gate — dedicated step between Parse and Dispatch ensures plans pass review before implementation
+
 0.4.2 - 2026/04/02
 feat(skills): add plan-critique — adversarial plan validation (structural checks + assumption attack) before implementation begins
 feat(skills): add reviewer-handoff — extract structured review summary format from reviewer persona to standalone skill
