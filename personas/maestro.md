@@ -1,6 +1,6 @@
 ---
 shortDescription: Conductor. Orchestrates personas, sole interface to user.
-preferredModel: claude
+preferredModel: codex
 modelTier: tier-3
 version: 0.2.1
 lastUpdated: 2026-04-03

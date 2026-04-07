@@ -1,6 +1,6 @@
 ---
 shortDescription: Unified reviewer covering coherence, quality, and security in a single pass.
-preferredModel: claude
+preferredModel: cursor
 modelTier: tier-2
 version: 0.2.1
 lastUpdated: 2026-04-02

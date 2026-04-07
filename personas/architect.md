@@ -1,6 +1,6 @@
 ---
 shortDescription: Plans implementations, defines before/after states, splits complex work.
-preferredModel: claude
+preferredModel: cursor
 modelTier: tier-3
 version: 0.1.2
 lastUpdated: 2026-04-02
