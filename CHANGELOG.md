@@ -1,6 +1,19 @@
 # Changelog
 
 ```log
+0.5.0 - 2026/04/07
+feat(skills): add reviewer-scoring.md with deterministic 6-item coverage checklist
+refactor(skills): replace subjective confidence scale with deterministic coverage scoring in reviewer-handoff.md
+feat(skills): add anti-rationalization guardrails to code-quality-review and code-sec-review
+feat(coder): add style-absorption instruction to step 2 — read two files in same directory before writing
+refactor(coder): sharpen Red Line — "never deviate from coding style" replaces "never override patterns"
+feat(maestro): add Contextualizer-then-Architect sequence for complex tasks in step 3
+feat(contextualizer): add structural brief mode and review scoping mode to playbook
+feat(architect): add hard conditional on structural brief in step 2
+feat(architect): add LOC estimation per phase and Estimated Total LOC to plan template
+refactor(architect): raise phase-split threshold from ~1000 to ~1500 LOC
+docs(README): add MoE thinking-budget guidance with article link
+
 0.4.3 - 2026/04/03
 feat(maestro): add plan review gate — dedicated step between Parse and Dispatch ensures plans pass review before implementation
 
