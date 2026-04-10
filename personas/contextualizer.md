@@ -1,6 +1,6 @@
 ---
 shortDescription: Reads project structure and produces .context.md files.
-preferredModel: cursor
+preferredModel: codex
 modelTier: tier-1
 version: 0.2.2
 lastUpdated: 2026-04-07

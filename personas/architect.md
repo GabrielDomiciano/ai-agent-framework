@@ -1,6 +1,6 @@
 ---
 shortDescription: Plans implementations, defines before/after states, splits complex work.
-preferredModel: cursor
+preferredModel: codex
 modelTier: tier-3
 version: 0.1.4
 lastUpdated: 2026-04-07
